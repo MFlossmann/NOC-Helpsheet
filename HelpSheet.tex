@@ -1,0 +1,53 @@
+%------------------------------------------------------------------
+% Einstellen der Grundzüge des Layouts, z. B. Blattgröße
+%------------------------------------------------------------------
+\documentclass[a4paper,twoside=false,fontsize=6,numbers=noenddot,DIV=16]{scrreprt}
+\usepackage[landscape, left=5mm, right=5mm, top=5mm, bottom=5mm]{geometry}
+\pagestyle{empty}
+
+%------------------------------------------------------------------
+% Importieren den notwendigen packages
+%------------------------------------------------------------------
+\include{tex/packages}
+
+%------------------------------------------------------------------
+% Weitere Einstellungen (Farben / Numerierungstiefen)
+%------------------------------------------------------------------
+\include{tex/settings}
+
+% New definitions
+\newcommand{\argmin}{\arg\!\min}
+\newcommand{\argmax}{\arg\!\max}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\cov}{\mathrm{cov}}
+\newcommand{\var}{\mathrm{var}}
+\newcommand{\matrixroot}[1]{#1^{\frac{1}{2}}}
+\newcommand{\ti}[2]{#1_\mathrm{#2}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\trans}{^\top}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+
+%------------------------------------------------------------------
+% Dokumentbeginn
+%------------------------------------------------------------------
+\begin{document}
+
+\setlength{\columnsep}{0.4cm}
+\setlength{\columnseprule}{0pt}
+\begin{multicols*}{3}
+	\input{pages/00_Introduction}
+	%\input{pages/01_Probability_and_Statistics}
+	%\input{pages/02_Linear_Least_Squares_Estimation}
+	%\input{pages/03_Maximum_Likelihood_Estimation}
+	%\input{pages/04_Dynamic_Models}
+	%\input{pages/05_Non_Param_and_Freq_Domain_Ident}
+\end{multicols*}
+
+\end{document}
+
+%%% Local Variables:
+%%% coding: utf-8
+%%% mode: latex
+%%% TeX-engine: xetex
+%%% TeX-master: t
+%%% End:

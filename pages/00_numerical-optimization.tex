@@ -1,0 +1,46 @@
+% -----------------------------------------------------------------
+% 			  Introduction
+% -----------------------------------------------------------------
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=\textbf{Numerical Optimization}]
+{\bf {\sc Newton} Root-finding problem}
+\begin{flalign*}
+R:\mathbb{R}^n\rightarrow \mathbb{R}^n
+\end{flalign*}
+Root-finding series:
+\begin{flalign*}
+z_{k+1}=z_k - (\nabla_z R(z_k))^{-1}\cdot R(z_k)
+\end{flalign*}
+\hfill $\nabla f(x) := \frac{\partial f}{\partial x}(x)^\top$\\
+General {\sc Newton} type method:
+\begin{flalign*}
+z_{k+1}=z_k - M_k^{-1}\cdot R(z_k)\ |\ M_k\approx \nabla_z R(z_k)
+\end{flalign*}
+{\bf Local-contraction theorem} for \textsc{Newton} type iterations:
+\begin{flalign*}
+  \norm{z_{k+1}-z^*}\le
+  \left(
+    \kappa_k+\frac{\omega}{2}\norm{z_k-z^*}
+  \right)\norm{z_k-z^*}\end{flalign*}
+  \begin{flalign*}
+  \mathrm{if}\ \exists \omega < \infty, \kappa <1\ \mathrm{such\ that}\\
+  \norm{M_k^{-1}(\nabla_z R(z_k)-\nabla_z R(z)} \le \omega \norm{z_k -z}\ 
+  (\textsc{Lipschitz}\mathrm{-condition})\\
+  \norm{M_k^{-1}(\nabla_z R(z_k) - M_k)} \le  \kappa_k \le \kappa\
+  (\mathrm{compatibility\ condition})\\
+  \mathrm{and}\ \norm{z_0-z^*}<\frac{2(1-\kappa)}{\omega}
+\end{flalign*}
+Notes:
+\begin{itemize}
+\item $R(z^*)=0$
+\item $\kappa=0$ for exact \textsc{Newton}
+\end{itemize}
+
+\tcblower
+\blindtext
+
+\end{tcolorbox}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../HelpSheet"
+%%% End:

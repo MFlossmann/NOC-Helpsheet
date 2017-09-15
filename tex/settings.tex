@@ -1,0 +1,61 @@
+%------------------------------------------------------------------
+% THI und Continental Farbdefinitionen
+%------------------------------------------------------------------
+\definecolor{haw_mag}{RGB}{0, 90, 155}
+\definecolor{conti}{RGB}{255, 165, 0}
+\definecolor{uniFR}{RGB}{0, 76, 153}
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+\definecolor{pink}  {rgb}{0.67, 0.05, 0.57}
+\definecolor{red}   {rgb}{0.87, 0.20, 0.00}
+\definecolor{green} {rgb}{0.00, 0.47, 0.00}
+\definecolor{violet}{rgb}{0.41, 0.12, 0.61}
+\definecolor{blue}  {rgb}{0.00, 0.00, 1}
+\definecolor{brown} {rgb}{0.39, 0.22, 0.13}
+
+%------------------------------------------------------------------
+% Zuweisung der Farben zu den Überschriften
+%------------------------------------------------------------------
+\addtokomafont{chapter}{\color{black}}
+\addtokomafont{section}{\color{black}}
+\addtokomafont{caption}{\color{black}}
+\addtokomafont{subsection}{\color{black}}
+\addtokomafont{subsubsection}{\color{black}}
+\setkomafont{captionlabel}{\color{black}}
+
+\setkomafont{section}{\large}
+\setkomafont{subsection}{\normalfont}
+\setkomafont{subsubsection}{\small}
+\setkomafont{paragraph}{\small}
+\setkomafont{subparagraph}{\small}
+
+%------------------------------------------------------------------
+% Save some space with less space after equations
+%------------------------------------------------------------------
+\newcommand{\zerodisplayskips}{%
+	\setlength{\abovedisplayskip}{2pt}%
+	\setlength{\belowdisplayskip}{2pt}%
+	\setlength{\abovedisplayshortskip}{1pt}%
+	\setlength{\belowdisplayshortskip}{1pt}}
+\appto{\normalsize}{\zerodisplayskips}
+\appto{\small}{\zerodisplayskips}
+\appto{\footnotesize}{\zerodisplayskips}
+
+%------------------------------------------------------------------
+% Tiefe der Numerierung und des Inhaltsverzeichnises:
+% Kapitel- bis Unterunterabschnittsüberschriften
+%------------------------------------------------------------------
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+%------------------------------------------------------------------
+% Colorboxen immer nach oben anordnen
+%------------------------------------------------------------------
+\raggedcolumns
+
+%------------------------------------------------------------------
+% Spacing vor und nach itemize entfernen
+%------------------------------------------------------------------
+\setlist{nolistsep}
+

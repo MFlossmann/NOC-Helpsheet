@@ -76,16 +76,74 @@ solution $z^*$ of $R(z)$
   \end{itemize}
   \textsc{LaGrangian}
   \begin{flalign*}
-    \mathcal{L}(w,\lambda, \mu) = f(w) + \lambda^\top g(w) + \mu^\top h(w)
+    \mathcal{L}(w,\lambda, \mu) = f(w) + \lambda^\top g(w) + \mu^\top h(w) \\
+    \mathcal{A}(w^*):=\{i|i=1,2,...,n_h; \lambda^*_i \ne 0\}\ \mathrm{(``Active\ Set"')}
   \end{flalign*}
-  \textbf{1. KKT cond.}
+  \textbf{1. KKT cond.} %TODO: 2nd KKT
   \begin{flalign*}
     \nabla_w\mathcal{L}(w^*,\lambda^*,\mu^*)=0
   \end{flalign*}
-  % Note: Own notes: page 5 
-  %\textbf{2. KKT cond.}
-  
+  % \textbf{2. KKT cond.}
+  Remarks:
+  \begin{itemize}
+  \item $\nabla_w\mathcal{L}(w^*,\lambda^*)$ for equality constr. only
+  \item $\mu_i\ge 0 \Leftrightarrow$ ``Can't push downhill''
+  \end{itemize}
+  \textbf{Complementary conditions}
+  \begin{flalign*}
+    \left.
+    \begin{array}{r}
+    h_i(w^*) \le 0 \\
+    \mu_i^* \ge 0 \\
+    \mu_ih_i(w^*) = 0
+    \end{array}      
+    \right\}\mathrm{NOT\ differentiable!}
+  \end{flalign*}
+  \textbf{Second order optimality conditions}\\
+  \begin{itemize}
+  \item[\textbf{SONC}] $w^*$ local min $\Rightarrow Z^\top
+    \nabla_w^2\mathcal{L}(w^*,\lambda^*, \mu^*)Z
+    \succcurlyeq 0$
+    % TODO: Maybe decide whether to mention the reduced hessian?
+  \item[\textbf{SOSC}] $w^*$ local min $\Leftarrow Z^\top
+    \nabla_w^2\mathcal{L}(w^*,\lambda^*, \mu^*)Z\succ 0$
+  \item[with] $Z^\top Z=I, \frac{\partial \tilde{g}}{\partial w}(w^*)Z=0$
+  \end{itemize}
+  \begin{flalign*}
+    \tilde{g}(w)=
+    \left[
+      \begin{array}{c}
+        g(w) \\ h_i(w^*), i\in \mathcal{A}(w^*)
+      \end{array}
+    \right]
+  \end{flalign*}
+\end{tcolorbox}
 
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=\textsc{Newton}\textbf{-type
+    optimal algorithms}]
+  $\rightarrow$ only equality-conditions
+  \begin{flalign*}
+    \left[
+      \begin{array}{c}
+        w_{k+1} \\ \lambda_{k+1}
+      \end{array}
+    \right]
+    =
+    \left[
+      \begin{array}{c}
+        w_k \\ 0
+      \end{array}
+    \right]
+    -
+    \underbrace{
+    \left[
+      \begin{array}{cc}
+        B_k & \nabla_w g(w_k) \\
+        \nabla_w g(w_k)^\top & 0\\
+      \end{array}^{-1}
+    \right]}_\text{inverse\ KKT-Matrix}
+\end{flalign*}
+Exact \textsc{Newton}: $\nabla_w^2\mathcal{L}(w_k,\lambda_k)$, else: approximate it!
 \end{tcolorbox}
 
 %%% Local Variables:

@@ -1,4 +1,4 @@
-
+﻿Block 1: Mara
 Other
 	Convexity
 	LICQ
@@ -14,10 +14,11 @@ KKT
 	Reduced Hessian
 
 Optimization Strategies
-	QP
+	QP -> Sparsity exploitation
 	SQP
 	IPM
 
+Block 2: Paul 
 Optimization Methods (cont. time examples)
 	Sequential - Direct Single Shooting
 	Simultaneous - Direct Multiple Shooting
@@ -32,6 +33,7 @@ Dynamic Programming
 	LQR
 	Hamilton-Jacobi-Bellman
 
+Block 3: Tobi
 AD
 	FWD
 	BWD

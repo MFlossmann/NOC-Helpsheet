@@ -1,0 +1,54 @@
+
+Other
+	Convexity
+	LICQ
+	Linear Stability Analysis
+	Lipshitz
+	Armijo condition (line search)
+	Local Contraction
+	Active Set
+
+KKT
+	Lagrangian
+	SOSC -> KKT invertible ->  solution stable against perturbation 
+	Reduced Hessian
+
+Optimization Strategies
+	QP
+	SQP
+	IPM
+
+Optimization Methods (cont. time examples)
+	Sequential - Direct Single Shooting
+	Simultaneous - Direct Multiple Shooting
+	Simultaneous - Direct Collocation
+	Indirect Approaches (213)
+
+Dynamic Programming
+	Robust DP and Stochastic DP exists
+	“Curse of dimensionality”
+	Linear Quadratic Programming
+	Bellman Equation
+	LQR
+	Hamilton-Jacobi-Bellman
+
+AD
+	FWD
+	BWD
+	(Imaginary Trick)
+
+Integrators
+	Explicit
+	Implicit - relation to stiff systems
+	Collocation
+	choice of collocation times
+
+Newton - root finding
+	
+Newton type methods
+
+MPC
+
+Parametric Optimal Control
+	Newton-Corrector
+	Tangential predictor

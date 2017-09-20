@@ -2,7 +2,7 @@
 % 			  Introduction
 % -----------------------------------------------------------------
 \begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=\textbf{Numerical Optimization}]
-{\bf {\sc Newton} Root-finding problem}
+{\textbf {\textsc Newton} Root-finding problem}
 \begin{flalign*}
 R:\mathbb{R}^n\rightarrow \mathbb{R}^n
 \end{flalign*}
@@ -11,11 +11,11 @@ Root-finding series:
 z_{k+1}=z_k - (\nabla_z R(z_k))^{-1}\cdot R(z_k)
 \end{flalign*}
 \hfill $\nabla f(x) := \frac{\partial f}{\partial x}(x)^\top$\\
-General {\sc Newton} type method (NT-method):
+General {\textsc Newton} type method (NT-method):
 \begin{flalign*}
 z_{k+1}=z_k - M_k^{-1}\cdot R(z_k)\ |\ M_k\approx \nabla_z R(z_k)
 \end{flalign*}
-{\bf Local-contraction theorem} for \textsc{Newton} type iterations:
+{\textbf Local-contraction theorem} for \textsc{Newton} type iterations:
 \begin{flalign*}
   \norm{z_{k+1}-z^*}\le
   \left(
@@ -111,39 +111,52 @@ solution $z^*$ of $R(z)$
   \end{itemize}
   \begin{flalign*}
     \tilde{g}(w)=
-    \left[
-      \begin{array}{c}
+	\begin{bmatrix}
         g(w) \\ h_i(w^*), i\in \mathcal{A}(w^*)
-      \end{array}
-    \right]
+	\end{bmatrix}
   \end{flalign*}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=\textsc{Newton}\textbf{-type
-    optimal algorithms}]
-  $\rightarrow$ only equality-conditions
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=\textbf{\textsc{Newton}-type
+    methods}]
+  Only consider active inequality constraints $\rightarrow$ only equality-conditions\\
+  Iteration:
   \begin{flalign*}
-    \left[
-      \begin{array}{c}
+	\begin{bmatrix}
         w_{k+1} \\ \lambda_{k+1}
-      \end{array}
-    \right]
-    =
-    \left[
-      \begin{array}{c}
+	\end{bmatrix}
+    &=
+	\begin{bmatrix}
         w_k \\ 0
-      \end{array}
-    \right]
+	\end{bmatrix}
     -
     \underbrace{
-    \left[
-      \begin{array}{cc}
-        B_k & \nabla_w g(w_k) \\
-        \nabla_w g(w_k)^\top & 0\\
-      \end{array}^{-1}
-    \right]}_\text{inverse\ KKT-Matrix}
+    	\begin{bmatrix}
+    		B_k & \nabla_w g(w_k) \\
+    		\nabla_w g(w_k)^\top & 0\\
+    	\end{bmatrix}^{-1}
+	}_\text{inverse\ KKT-Matrix}
+	\begin{bmatrix}
+		\nabla_w f(w_k) \\
+		g(w_k)
+	\end{bmatrix}\\
+	&=
+		\begin{bmatrix}
+			w_k \\ \lambda_k
+		\end{bmatrix}
+	- 
+	\begin{bmatrix}
+		B_k & \nabla_w g(w_k) \\
+		\nabla_w g(w_k)^\top & 0\\
+	\end{bmatrix}^{-1}
+		\begin{bmatrix}
+		\nabla_w L(w_k, \lambda) \\
+		g(w)
+	\end{bmatrix}\\
 \end{flalign*}
-Exact \textsc{Newton}: $\nabla_w^2\mathcal{L}(w_k,\lambda_k)$, else: approximate it!
+Exact \textsc{Newton}: $B_k = \nabla_w^2\mathcal{L}(w_k,\lambda_k)$, quadratic convergence\\
+\textsc{Gauss-Newton}:  $f(w) = \frac{1}{2} \| R(w) \|_2^2$:$B_k = \sum_{i=1}^{n_R} \nabla_w R_i(w_k) \nabla_w R_i(w_k)^\top$\\ linear convergence\\
+\textsc{BFGS} Quasi-Newton:
 \end{tcolorbox}
 
 %%% Local Variables:

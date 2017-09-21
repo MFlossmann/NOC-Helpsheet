@@ -22,13 +22,6 @@ Optimization Strategies
 	SQP
 	IPM
 
-Block 2: Paul 
-Optimization Methods (cont. time examples)
-	Sequential - Direct Single Shooting
-	Simultaneous - Direct Multiple Shooting
-	Simultaneous - Direct Collocation
-	Indirect Approaches (213)
-
 Dynamic Programming
 	Robust DP and Stochastic DP exists
 	“Curse of dimensionality”
@@ -36,6 +29,13 @@ Dynamic Programming
 	Bellman Equation
 	LQR
 	Hamilton-Jacobi-Bellman
+
+Block 2: Paul 
+Optimization Methods (cont. time examples)
+	Sequential - Direct Single Shooting
+	Simultaneous - Direct Multiple Shooting
+	Simultaneous - Direct Collocation
+	Indirect Approaches (213)
 
 Block 3: Mara
 AD

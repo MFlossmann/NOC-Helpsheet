@@ -1,0 +1,34 @@
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Indirect Approach}]
+\begin{itemize}
+	\item \textit{first optimize then discretize}
+	\item controls must be eliminatable
+	\item controls might be discontinuous
+	\item differential equation might mbe unstable, very non lin and not suitable for forward simulation\\
+\end{itemize}
+\textbf{Two Point Boundary Value Problem (TPBVP)}
+\begin{align*}
+	x^*(0) &= \bar{x}_0 & & \text{(init val)}\\
+	\dot{x}^*(t) &= f(x^*(t), u^*(t)) \quad &t \in [0, T] \quad & \text{(ODE)}\\
+	\dot{\lambda}^*(t) &= - \nabla_x H(x^*(t), \lambda^*(t), u^*(t)) \quad & t \in [0, T] \quad & \text{(adjoint eq.)}\\
+	u^*(t) &= \arg \min_u H(x^*(t), \lambda^*(t), u) & & \text{(min.principle)}\\
+	\lambda^*(T) &= \nabla E(x^*(T)) & & \text{(adjoint final val)}
+\end{align*}
+Equations 2,3,4 can be combined, such that
+\begin{align*}
+	y(t) = \begin{bmatrix}
+	x(t) \\ \lambda(t)
+	\end{bmatrix}
+	 \quad
+	 \dot{y} =
+	 \begin{bmatrix}
+		 f(x^*(t), u^*(t))\\
+		 - \nabla_x H(x^*(t), \lambda^*(t), u^*(t))
+	 \end{bmatrix}
+ 	\quad
+ 	y(0) = \begin{bmatrix}
+		x_0\\ \lambda_0
+ 	\end{bmatrix}
+\end{align*}
+The only unkown is $\lambda_0$. Use newton-type method to find it s.t. $\lambda^*(T) = \nabla E(x^*(T)) $
+\end{tcolorbox}

@@ -7,7 +7,12 @@
 	\begin{itemize}
 		\item infeasible points have $L(x,u) = \infty$
 		\item Backward sweep to obtain controls
-		\item Forward sweep to obtain state trajectory\\
+		\item Forward sweep to obtain state trajectory
+		\item \textit{curse of dimensionality}: approach infeasible for $(n_x>6)$
+		\item Robust DP (anticipate oponent or disturbance)\\
+		$J_k(x) = \min_u \max_w L_k(x,u,w) + J_{k+1}(f_k(x,u,w))$
+		\item Stochastic DP (optmize expectation value)\\
+		$J_k(x) = \min_u \mathbb{E}_w\{ L_k(x,u,w) + J_{k+1}(f_k(x,u,w)) \}$\\
 	\end{itemize}
 
 	\textbf{Bellman Equation}

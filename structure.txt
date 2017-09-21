@@ -7,6 +7,7 @@ Other
 	Armijo condition (line search)
 	Local Contraction
 	Active Set
+	MPC
 
 Newton - root finding
 	
@@ -48,8 +49,6 @@ Integrators
 	Implicit - relation to stiff systems
 	Collocation
 	choice of collocation times
-
-MPC
 
 Parametric Optimal Control
 	Newton-Corrector

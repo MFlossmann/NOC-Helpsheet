@@ -71,6 +71,32 @@ For a given merrit function $V(z) = \frac{1}{2} \norm{R(z)}^2_2$ and the exact n
 \end{flalign*}
 decrease step length $\alpha$ if AC is not fulfilled: $\alpha = \beta \alpha$, \; $\beta \in (0,1]$.\\
 
+\textbf{MPC} - Realtime-Strategies:
+
+Offline Precomputation
+\begin{itemize}
+	\item Compute Feedback Laws $u^N_{MPC} (\cdot)$ "curse of dimensionality"
+	\item Factorize matrices
+	\item Code generation (code optimization)
+	\item Model simplification
+\end{itemize}
+
+Preparation and Feedback Phase\\
+$x_k$ delay \hspace{.5mm} $u_k$ \hspace{.5cm}prepare \hspace{1.cm} $x_{k+1}$ delay $u_{k+1}$ \hspace{.2cm}prepare\\
+{\textcolor{black}{\rule{1mm}{2mm}}}{\textcolor{red}{\rule{1.2cm}{1mm}}}{\textcolor{blue}{\rule{1mm}{2mm}}}{\textcolor{green}{\rule{3cm}{1mm}}}{\textcolor{black}{\rule{1mm}{2mm}}}{\textcolor{red}{\rule{1.2cm}{1mm}}}{\textcolor{blue}{\rule{1mm}{2mm}}}{\textcolor{green}{\rule{1.5cm}{1mm}}}\\
+Delay Compenasation by Prediction\\
+Online Techniques
+\begin{itemize}
+	\item Iterate while problem changes
+	\item Parallelization
+	\item Adapt to CPU
+\end{itemize}
+
+Warmstart and Shifting Methods
+\begin{itemize}
+	\item Warmstart without shifting
+	\item shift, copy last state, or use clever alternative
+\end{itemize}
 
 \end{tcolorbox}
 

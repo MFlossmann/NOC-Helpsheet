@@ -22,12 +22,12 @@ z_{k+1}=z_k - M_k^{-1}\cdot R(z_k)\ |\ M_k\approx \nabla_z R(z_k)
     \kappa_k+\frac{\omega}{2}\norm{z_k-z^*}
   \right)\norm{z_k-z^*}\end{flalign*}
   \begin{flalign*}
-  \mathrm{if}\ \exists \omega < \infty, \kappa <1\ \mathrm{such\ that}\\
+  \mathrm{if}\ \exists \omega < \infty, \kappa <1\ \mathrm{such\ that} \; \forall z_k, z\\
   \norm{M_k^{-1}(\nabla_z R(z_k)-\nabla_z R(z)} \le \omega \norm{z_k -z}\ 
   (\textsc{Lipschitz}\mathrm{-condition})\\
   \norm{M_k^{-1}(\nabla_z R(z_k) - M_k)} \le  \kappa_k \le \kappa\
   (\mathrm{compatibility\ condition})\\
-  \mathrm{and}\ \norm{z_0-z^*}<\frac{2(1-\kappa)}{\omega}
+  \mathrm{and}\ \norm{z_0-z^*}<\frac{2(1-\kappa)}{\omega} \; (\mathrm{restrictive\ condition:} \kappa <1)
 \end{flalign*}
 Notes:
 \begin{itemize}
@@ -55,29 +55,60 @@ solution $z^*$ of $R(z)$
   \right.
 \end{flalign*}
 \begin{itemize}
-\item Arugment in $\rho$: Difference of approximate of Jacobian at $z^*$
+\item Argument in $\rho$: Difference of approximate of Jacobian at $z^*$
 \item \textbf{``spectral radius''} $\rho(A):=\max (|\lambda|\in \mathrm{eig}(A))$
-\end{itemize}
+\end{itemize} 
+
+\vspace{5px}
+\textbf{Globalization} to reach region of local convergence\\
+Armijo-Backtracking: Choose next Newton step s.t. $V(z) = \frac{1}{2} \norm{R(z)}^2$ is decreased sufficiently: 
+\begin{flalign*}
+	V(z + \alpha \cdot p(z)) \leq V(z) + \alpha \gamma \nabla V(z)^T p(z) \;\;\;\;\; \alpha \in (0,1], \gamma \in (0,\frac{1}{2})
+\end{flalign*}
+decrease step length if AC is not fulfilled: $\alpha = \beta \alpha$, \; $\beta \in (0,1]$.
+
+
+\vspace{5px}
+\textbf{Convex Optimization} \\
+\textit{Convex Set} $\Omega \subset \mathbb{R}^n \mathrm{\ IF\ } \forall x,y \in \Omega, t\in [0,1]: \; x + t(y-x) \in \Omega$ \\
+The feasible set $\Omega$ is convex if $g$ is affine and $h_i$ are convex.\\
+\textit{Convex Function} $f:\Omega \rightarrow \mathbb{R} \hspace{10px} \mathrm{ \ IF\ } \Omega \mathrm{\ is\ convex\ } \forall x,y, \in \Omega t \in [0,1]: \\f(x+t(y-x)) \leq f(x) + t(f(y) - f(x))$\\
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=\textbf{Nonlinear
     Optimization (NLP)}]
-  \textbf{Problem:}
+  \textbf{Problem:}\\
+	\noindent\begin{minipage}{0.25\textwidth}
+		\begin{empheq}[box=\widefbox]{align*}
+			\min_w &\ f(w) \\
+			\mathrm{s.t.} &\ g(w)=0 \\
+			&\ h(w) \le 0
+		\end{empheq}
+	\end{minipage}%
+	\begin{minipage}{0.3\textwidth}
+		\begin{empheq}[box=\widefbox]{align*}
+			\min_w &\ c^T w \\
+			\mathrm{s.t.} &\ Aw - b =0 \\
+			&\ cw - d \le 0
+		\end{empheq}
+	\end{minipage}%
+	\begin{minipage}{0.3\textwidth}
+		\begin{empheq}[box=\widefbox]{align*}
+			\min_w &\ c^T w + \frac{1}{2} w^T B w \\
+			\mathrm{s.t.} &\ Aw - b =0 \\
+			&\ Cw - d \le 0
+		\end{empheq}
+	\end{minipage}
 
-    \begin{empheq}[box=\fbox]{align*}
-        \min_w &\ f(w) \\
-        \mathrm{s.t.} &\ g(w)=0 \\
-        &\ h(w) \le 0
-    \end{empheq}
     \begin{itemize}
     \item Feasible set: $\Omega:= \{w\in\mathbb{R}^n|g(w)=0, h(w)\le 0\}$
     \item Active set at $w\in \Omega$: index $i$ is \emph{active} at $w\Leftrightarrow
     h_i(w)=0$
-  \end{itemize}
-  \textsc{LaGrangian}
+    \end{itemize}
+  \textsc{Lagrangian}
   \begin{flalign*}
     \mathcal{L}(w,\lambda, \mu) = f(w) + \lambda^\top g(w) + \mu^\top h(w) \\
-    \mathcal{A}(w^*):=\{i|i=1,2,...,n_h; \lambda^*_i \ne 0\}\ \mathrm{(``Active\ Set"')}
+    \mathcal{A}(w^*):=\{i|i=1,2,...,n_h; \mu^*_i \ne 0\}\ \mathrm{(``Active\ Set"')}
   \end{flalign*}
   \textbf{1. KKT cond.} %TODO: 2nd KKT
   \begin{flalign*}

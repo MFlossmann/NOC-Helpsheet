@@ -1,0 +1,59 @@
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=\textbf{Basics}]
+
+\textbf{ \textsc{Newton} Root-finding problem}\\
+for $R:\mathbb{R}^n\rightarrow \mathbb{R}^n$ find $z$ such that $R(z) = 0$
+
+Root-finding series:
+\begin{flalign*}
+z_{k+1}=z_k - (\nabla_z R(z_k))^{-1}\cdot R(z_k) \quad \text{, with }\nabla f(x) := \frac{\partial f}{\partial x}(x)^\top
+\end{flalign*}
+General {\textsc Newton} type method (NT-method):
+\begin{flalign*}
+z_{k+1}=z_k - M_k^{-1}\cdot R(z_k)\ |\ M_k\approx \nabla_z R(z_k) \text{(invertible apporximation)}
+\end{flalign*}\\
+
+\textbf{ Local-contraction theorem} for \textsc{Newton} type iterations:
+\begin{flalign*}
+  \norm{z_{k+1}-z^*}\le
+  \left(
+    \kappa_k+\frac{\omega}{2}\norm{z_k-z^*}
+  \right)\norm{z_k-z^*}\end{flalign*}
+  \begin{flalign*}
+  \mathrm{if}\ \exists \omega < \infty, \kappa <1\ \mathrm{such\ that}\\
+  \norm{M_k^{-1}(\nabla_z R(z_k)-\nabla_z R(z)} \le \omega \norm{z_k -z}\ 
+  (\textsc{Lipschitz}\mathrm{-condition})\\
+  \norm{M_k^{-1}(\nabla_z R(z_k) - M_k)} \le  \kappa_k \le \kappa\
+  (\mathrm{compatibility\ condition})\\
+  \mathrm{and}\ \norm{z_0-z^*}<\frac{2(1-\kappa)}{\omega}
+\end{flalign*}
+Notes:
+\begin{itemize}
+\item $R(z^*)=0$
+\item $\kappa=0$ for exact \textsc{Newton}\\
+\end{itemize}
+
+\textbf{\textsc{Lipschitz}-condition}
+\begin{flalign*}
+	\norm{f(x) - f(y)} \leq L \cdot \norm{x - y} \quad \text{for $L \leq \infty$ }
+\end{flalign*}
+$\Rightarrow$ an IVP has a unique solution if for the dynamics $f$ the above holds\\
+
+\textbf{Convexity} if $\forall x,y \in \Omega, t \in [0,1]:$
+\begin{flalign*}
+	x + t (y-x) \in \Omega &\to \Omega \text{ is convex set} \\
+	f(x+t(y-x)) \leq t (f(x) - f(y)) &\to f \text{ is convex function}
+\end{flalign*}\\
+
+\textbf{\textsc{Armijo}-condition}\\
+For a given merrit function $V(z) = \frac{1}{2} \norm{R(z)}^2_2$, and the exact newton-step $p(z) = - J(z)^{-1} R(z)$, and $\gamma \in (0, \frac{1}{2})$ exists an $\alpha \in (0,1]$, such that
+\begin{flalign*}
+	V(z+\alpha p(z)) \leq V(z) + \alpha \gamma \nabla V(z)^\top p(z)
+\end{flalign*}
+$\rightarrow$ true descent (find $\alpha$ by line-search)
+\end{tcolorbox}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../HelpSheet"
+%%% End:

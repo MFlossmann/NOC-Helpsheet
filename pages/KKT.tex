@@ -1,0 +1,97 @@
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=\textbf{Karush-Kuhn-Tucker (KKT) Conditions}]
+	\textbf{Problem:}
+	
+	\begin{empheq}[box=\fbox]{align*}
+		\min_w &\ f(w) \\
+		\mathrm{s.t.} &\ g(w)=0 \\
+		&\ h(w) \le 0
+	\end{empheq}
+	\begin{itemize}
+		\item Feasible set: $\Omega:= \{w\in\mathbb{R}^n|g(w)=0, h(w)\le 0\}$
+		\item Active set at $w\in \Omega$: index $i$ is \emph{active} at $w\Leftrightarrow
+		h_i(w)=0$
+	\end{itemize}
+	\textsc{LaGrangian}
+	\begin{flalign*}
+		\mathcal{L}(w,\lambda, \mu) = f(w) + \lambda^\top g(w) + \mu^\top h(w) \\
+		\mathcal{A}(w^*):=\{i|i=1,2,...,n_h; \lambda^*_i \ne 0\}\ \mathrm{(``Active\ Set"')}
+	\end{flalign*}
+	\textbf{1. KKT cond.} %TODO: 2nd KKT
+	\begin{flalign*}
+		\nabla_w\mathcal{L}(w^*,\lambda^*,\mu^*)=0
+	\end{flalign*}
+	% \textbf{2. KKT cond.}
+	Remarks:
+	\begin{itemize}
+		\item $\nabla_w\mathcal{L}(w^*,\lambda^*)$ for equality constr. only
+		\item $\mu_i\ge 0 \Leftrightarrow$ ``Can't push downhill''
+	\end{itemize}
+	\textbf{Complementary conditions}
+	\begin{flalign*}
+		\left.
+		\begin{array}{r}
+			h_i(w^*) \le 0 \\
+			\mu_i^* \ge 0 \\
+			\mu_ih_i(w^*) = 0
+		\end{array}      
+		\right\}\mathrm{NOT\ differentiable!}
+	\end{flalign*}
+	\textbf{Second order optimality conditions}\\
+	\begin{itemize}
+		\item[\textbf{SONC}] $w^*$ local min $\Rightarrow Z^\top
+		\nabla_w^2\mathcal{L}(w^*,\lambda^*, \mu^*)Z
+		\succcurlyeq 0$
+		% TODO: Maybe decide whether to mention the reduced hessian?
+		\item[\textbf{SOSC}] $w^*$ local min $\Leftarrow Z^\top
+		\nabla_w^2\mathcal{L}(w^*,\lambda^*, \mu^*)Z\succ 0$
+		\item[with] $Z^\top Z=I, \frac{\partial \tilde{g}}{\partial w}(w^*)Z=0$
+	\end{itemize}
+	\begin{flalign*}
+		\tilde{g}(w)=
+		\begin{bmatrix}
+			g(w) \\ h_i(w^*), i\in \mathcal{A}(w^*)
+		\end{bmatrix}
+	\end{flalign*}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=\textbf{\textsc{Newton}-type
+		methods}]
+	Only consider active inequality constraints $\rightarrow$ only equality-conditions\\
+	Iteration:
+	\begin{flalign*}
+		\begin{bmatrix}
+			w_{k+1} \\ \lambda_{k+1}
+		\end{bmatrix}
+		&=
+		\begin{bmatrix}
+			w_k \\ 0
+		\end{bmatrix}
+		-
+		\underbrace{
+			\begin{bmatrix}
+				B_k & \nabla_w g(w_k) \\
+				\nabla_w g(w_k)^\top & 0\\
+			\end{bmatrix}^{-1}
+		}_\text{inverse\ KKT-Matrix}
+		\begin{bmatrix}
+			\nabla_w f(w_k) \\
+			g(w_k)
+		\end{bmatrix}\\
+		&=
+		\begin{bmatrix}
+			w_k \\ \lambda_k
+		\end{bmatrix}
+		- 
+		\begin{bmatrix}
+			B_k & \nabla_w g(w_k) \\
+			\nabla_w g(w_k)^\top & 0\\
+		\end{bmatrix}^{-1}
+		\begin{bmatrix}
+			\nabla_w L(w_k, \lambda) \\
+			g(w)
+		\end{bmatrix}\\
+	\end{flalign*}
+	Exact \textsc{Newton}: $B_k = \nabla_w^2\mathcal{L}(w_k,\lambda_k)$, quadratic convergence\\
+	\textsc{Gauss-Newton}:  $f(w) = \frac{1}{2} \| R(w) \|_2^2$:$B_k = \sum_{i=1}^{n_R} \nabla_w R_i(w_k) \nabla_w R_i(w_k)^\top$\\ linear convergence\\
+	\textsc{BFGS} Quasi-Newton: $B_{k+1} = - \frac{B_k s_k s_k^\top B_k}{s_k^\top B_k s_k} + \frac{y_k y_k^\top}{s_k y_k^\top}$
+\end{tcolorbox}

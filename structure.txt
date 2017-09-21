@@ -1,17 +1,22 @@
 
-Other
-	Convexity
-	LICQ
-	Linear Stability Analysis
+Basics [Tobi]
+	Newton
 	Lipshitz
-	Armijo condition (line search)
 	Local Contraction
-	Active Set
 
-KKT
+	Convexity
+	Linear Stability Analysis
+	Armijo condition (line search)
+	
+
+KKT [Tobi]
 	Lagrangian
+	Active Set
+	LICQ
 	SOSC -> KKT invertible ->  solution stable against perturbation 
 	Reduced Hessian
+
+Newton type methods [Tobi]
 
 Optimization Strategies
 	QP
@@ -42,11 +47,6 @@ Integrators
 	Implicit - relation to stiff systems
 	Collocation
 	choice of collocation times
-
-Newton - root finding
-	Clean-up
-	
-Newton type methods
 
 MPC
 

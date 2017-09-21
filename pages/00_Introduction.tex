@@ -1,21 +1,21 @@
 % -----------------------------------------------------------------
 % 			  Introduction
 % -----------------------------------------------------------------
-\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=\textbf{Numerical Optimization}]
-{\textbf {\textsc Newton} Root-finding problem}
-\begin{flalign*}
-R:\mathbb{R}^n\rightarrow \mathbb{R}^n
-\end{flalign*}
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=\textbf{Basics}]
+
+\textbf{ \textsc{Newton} Root-finding problem}\\
+for $R:\mathbb{R}^n\rightarrow \mathbb{R}^n$ find $z$ such that $R(z) = 0$
+
 Root-finding series:
 \begin{flalign*}
-z_{k+1}=z_k - (\nabla_z R(z_k))^{-1}\cdot R(z_k)
+z_{k+1}=z_k - (\nabla_z R(z_k))^{-1}\cdot R(z_k) \quad \text{, with }\nabla f(x) := \frac{\partial f}{\partial x}(x)^\top
 \end{flalign*}
-\hfill $\nabla f(x) := \frac{\partial f}{\partial x}(x)^\top$\\
 General {\textsc Newton} type method (NT-method):
 \begin{flalign*}
-z_{k+1}=z_k - M_k^{-1}\cdot R(z_k)\ |\ M_k\approx \nabla_z R(z_k)
-\end{flalign*}
-{\textbf Local-contraction theorem} for \textsc{Newton} type iterations:
+z_{k+1}=z_k - M_k^{-1}\cdot R(z_k)\ |\ M_k\approx \nabla_z R(z_k) \text{(invertible apporximation)}
+\end{flalign*}\\
+
+\textbf{ Local-contraction theorem} for \textsc{Newton} type iterations:
 \begin{flalign*}
   \norm{z_{k+1}-z^*}\le
   \left(
@@ -34,30 +34,7 @@ Notes:
 \item $R(z^*)=0$
 \item $\kappa=0$ for exact \textsc{Newton}
 \end{itemize}
-\textbf{Affine Invariance}: Affine Coordinate changes do not affect the optimal
-solution $z^*$ of $R(z)$
-\begin{align*}
-  R(z)\stackrel{!}{=}0 &\stackrel{\mathrm{NT}}{\rightarrow} z_0, z_1, ... \\
-  \Leftrightarrow \tilde{R}(y):=A\cdot R(b+By)
-  &\stackrel{\mathrm{NT}}{\rightarrow} y_0=B^{-1}(z_0-b),y_1, ...
-\end{align*}
 
-\tcblower
-
-\textbf{Tight condition for local convergence}
-\begin{flalign*}
-  \ti{\kappa}{exact}=\rho \left(M(z^*)\inv \left(M(z^*) - \nabla_z R(z^*)\right)\right)
-  \left\{
-  \begin{array}{cl}
-    < 1: &\mathrm{converges\ to\ }z^* \\
-    > 1: &\mathrm{diverges}
-  \end{array}
-  \right.
-\end{flalign*}
-\begin{itemize}
-\item Arugment in $\rho$: Difference of approximate of Jacobian at $z^*$
-\item \textbf{``spectral radius''} $\rho(A):=\max (|\lambda|\in \mathrm{eig}(A))$
-\end{itemize}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=\textbf{Nonlinear
@@ -156,7 +133,7 @@ solution $z^*$ of $R(z)$
 \end{flalign*}
 Exact \textsc{Newton}: $B_k = \nabla_w^2\mathcal{L}(w_k,\lambda_k)$, quadratic convergence\\
 \textsc{Gauss-Newton}:  $f(w) = \frac{1}{2} \| R(w) \|_2^2$:$B_k = \sum_{i=1}^{n_R} \nabla_w R_i(w_k) \nabla_w R_i(w_k)^\top$\\ linear convergence\\
-\textsc{BFGS} Quasi-Newton:
+\textsc{BFGS} Quasi-Newton: $B_{k+1} = - \frac{B_k s_k s_k^\top B_k}{s_k^\top B_k s_k} + \frac{y_k y_k^\top}{s_k y_k^\top}$
 \end{tcolorbox}
 
 %%% Local Variables:

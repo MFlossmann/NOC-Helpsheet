@@ -29,9 +29,26 @@ z_{k+1}=z_k - M_k^{-1}\cdot R(z_k)\ |\ M_k\approx \nabla_z R(z_k) \text{(inverti
 Notes:
 \begin{itemize}
 \item $R(z^*)=0$
-\item $\kappa=0$ for exact \textsc{Newton}\\
+\item $\kappa=0$ for exact \textsc{Newton} $\to$ quadratic convergence
+\item $\kappa_k \to 0$ for quasi \textsc{Newton} $\to$ super-linear convergence
+\item $\kappa < 1$ for \textsc{Gauss-Newton} $\to$ linear convergence\\
 \end{itemize}
 
+\textbf{Tight condition for local convergence}
+\begin{flalign*}
+	\ti{\kappa}{exact}=\rho \left(M(z^*)\inv \left(M(z^*) - \nabla_z R(z^*)\right)\right)
+	\left\{
+	\begin{array}{cl}
+		< 1: &\mathrm{converges\ to\ }z^* \\
+		> 1: &\mathrm{diverges}
+	\end{array}
+	\right.
+\end{flalign*}
+\begin{itemize}
+	\item Argument in $\rho$: Difference of approximate of Jacobian at $z^*$
+	\item \textit{``spectral radius''} $\rho(A):=\max (|\lambda|\in \mathrm{eig}(A))$\\
+\end{itemize} 
+\tcblower
 \textbf{\textsc{Lipschitz}-condition}
 \begin{flalign*}
 	\norm{f(x) - f(y)} \leq L \cdot \norm{x - y} \quad \text{for $L \leq \infty$ }
@@ -42,14 +59,19 @@ $\Rightarrow$ an IVP has a unique solution if for the dynamics $f$ the above hol
 \begin{flalign*}
 	x + t (y-x) \in \Omega &\to \Omega \text{ is convex set} \\
 	f(x+t(y-x)) \leq t (f(x) - f(y)) &\to f \text{ is convex function}
-\end{flalign*}\\
+\end{flalign*}
+The feasible set $\Omega$ is convex if $g$ is affine and $h_i \leq 0$ are convex.\\
+
+\textbf{Globalization} to reach region of local convergence\\
 
 \textbf{\textsc{Armijo}-condition}\\
-For a given merrit function $V(z) = \frac{1}{2} \norm{R(z)}^2_2$, and the exact newton-step $p(z) = - J(z)^{-1} R(z)$, and $\gamma \in (0, \frac{1}{2})$ exists an $\alpha \in (0,1]$, such that
+For a given merrit function $V(z) = \frac{1}{2} \norm{R(z)}^2_2$ and the exact newton-step $p(z) = - J(z)^{-1} R(z)$,  exists  $\alpha \in (0,1]$, such that
 \begin{flalign*}
-	V(z+\alpha p(z)) \leq V(z) + \alpha \gamma \nabla V(z)^\top p(z)
+	V(z+\alpha p(z)) \leq V(z) + \alpha \gamma \nabla V(z)^\top p(z) \quad \gamma \in (0, \frac{1}{2})
 \end{flalign*}
-$\rightarrow$ true descent (find $\alpha$ by line-search)
+decrease step length $\alpha$ if AC is not fulfilled: $\alpha = \beta \alpha$, \; $\beta \in (0,1]$.\\
+
+
 \end{tcolorbox}
 
 

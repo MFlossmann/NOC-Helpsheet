@@ -1,4 +1,4 @@
-﻿Block 1: Mara
+Block 1: Tobi
 Other
 	Convexity
 	LICQ
@@ -7,6 +7,10 @@ Other
 	Armijo condition (line search)
 	Local Contraction
 	Active Set
+
+Newton - root finding
+	
+Newton type methods
 
 KKT
 	Lagrangian
@@ -33,7 +37,7 @@ Dynamic Programming
 	LQR
 	Hamilton-Jacobi-Bellman
 
-Block 3: Tobi
+Block 3: Mara
 AD
 	FWD
 	BWD
@@ -44,10 +48,6 @@ Integrators
 	Implicit - relation to stiff systems
 	Collocation
 	choice of collocation times
-
-Newton - root finding
-	
-Newton type methods
 
 MPC
 

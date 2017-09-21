@@ -1,0 +1,54 @@
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=\textbf{Optimization Strategies}]
+	
+	\textbf{Interior Point Methods (IPM)}\\
+	choose smoothing constant $\tau  > 0$
+	\begin{flalign*}
+		\nabla f(w^*) + \nabla g(w^*) \lambda^* + \nabla h(w^*) \mu^* &= 0\\
+		h_i(w^*) &\le 0 \\
+		\mu_i^* &\ge 0 & i=0, ..., n_h\\
+		\mu_ih_i(w^*) + \tau &= 0 & i=0, ..., n_h&&
+	\end{flalign*}
+	\begin{itemize}
+		\item eliminate $\mu_i = - \frac{\tau}{h_i(w)}$
+		\item use  $\nabla_w \log (-h_i(w)) = \frac{1}{h_i(w)} \nabla_w h_i(w)$
+		\item solve \textit{barrier problem}:
+	\end{itemize}
+	\begin{flalign*}
+		\min_w\quad &f(w) - \tau \sum_{i=1}^{n_h} \log(-h_i(w))\\
+		\mathrm{s.t.}\quad &g(w) = 0
+	\end{flalign*}
+	alternative formulation that can handle \textit{infeasible initializations}:
+	\begin{flalign*}
+		\nabla f(w^*) + \nabla g(w^*) \lambda^* + \nabla h(w^*) \mu^* &= 0\\
+		h_i(w^*) &\le 0 \\
+		\mu_i^* s_i - \tau &=0 & i=0, ..., n_h\\
+		h_i(w^*) + s_i &= 0 & i=0, ..., n_h&&\\
+		s_i &\geq 0
+	\end{flalign*}
+	\tcblower
+	
+	\textbf{Linear Programming (LP)}
+	\begin{itemize}
+		\item if LP is bounded and has solution
+		\item feasible set is a limited number of vertices
+		\item feasible verices can be compared effiently (e.g. SIMPLEX algorithm)
+		\item iteratively refine active set
+	\end{itemize}
+	
+	\textbf{Quadratic Programming (QP)}
+	
+	\textbf{Sequential Quadratic Programming (SQP)}
+	\begin{itemize}
+		\item approximate problem by QP
+		\item in every iteration solve QP
+		\item use solution of previous iteration as  inital guess (warm start)
+		\item initialize active set from previous iteration (active set method)
+	\end{itemize}
+		\begin{flalign*}
+		\min_w\quad &\nabla_w f(w_k)^\top ( w - w_k) + \frac{1}{2} ( w - w_k)^\top B_k ( w - w_k)\\
+		\mathrm{s.t.}\quad &g(w_k) + \nabla_w g(w_k)^\top ( w - w_k)= 0\\
+		&h(w_k) + \nabla_w h(w_k)^\top ( w - w_k) \leq 0
+	\end{flalign*}
+
+\end{tcolorbox}

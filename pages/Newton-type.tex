@@ -1,0 +1,43 @@
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=\textbf{\textsc{Newton}-type
+		methods}]
+	Only consider active inequality constraints $\rightarrow$ only equality-conditions\\
+	Iteration:
+	\begin{flalign*}
+		\begin{bmatrix}
+			w_{k+1} \\ \lambda_{k+1}
+		\end{bmatrix}
+		&=
+		\begin{bmatrix}
+			w_k \\ 0
+		\end{bmatrix}
+		-
+		\underbrace{
+			\begin{bmatrix}
+				B_k & \nabla_w g(w_k) \\
+				\nabla_w g(w_k)^\top & 0\\
+			\end{bmatrix}^{-1}
+		}_\text{inverse\ KKT-Matrix}
+		\begin{bmatrix}
+			\nabla_w f(w_k) \\
+			g(w_k)
+		\end{bmatrix}\\
+		&=
+		\begin{bmatrix}
+			w_k \\ \lambda_k
+		\end{bmatrix}
+		- 
+		\begin{bmatrix}
+			B_k & \nabla_w g(w_k) \\
+			\nabla_w g(w_k)^\top & 0\\
+		\end{bmatrix}^{-1}
+		\begin{bmatrix}
+			\nabla_w L(w_k, \lambda) \\
+			g(w)
+		\end{bmatrix}\\
+	\end{flalign*}
+	Exact \textsc{Newton}: $B_k = \nabla_w^2\mathcal{L}(w_k,\lambda_k)$, \textit{quadratic convergence}\\
+	\textsc{Gauss-Newton}:  $f(w) = \frac{1}{2} \| R(w) \|_2^2$:$B_k = \sum_{i=1}^{n_R} \nabla_w R_i(w_k) \nabla_w R_i(w_k)^\top$\\ \textit{linear convergence}\\
+	\textsc{BFGS} Quasi-Newton: $B_{k+1} = - \frac{B_k s_k s_k^\top B_k}{s_k^\top B_k s_k} + \frac{y_k y_k^\top}{s_k y_k^\top}$\\
+	secant condition $B_{k+1} s_k = y_k$, step $s_k = w_{k+1} - w_k$, gradient step: $y_k = \nabla_w \mathcal{L}(w_{k+1}, \lambda_{k+1}) - \nabla_w \mathcal{L}(w_{k}, \lambda_{\mathbf{k+1}})$, \textit{super linear convergence}
+\end{tcolorbox}

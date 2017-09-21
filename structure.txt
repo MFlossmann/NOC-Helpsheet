@@ -44,6 +44,7 @@ Integrators
 	choice of collocation times
 
 Newton - root finding
+	Clean-up
 	
 Newton type methods
 

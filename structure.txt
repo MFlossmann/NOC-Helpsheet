@@ -1,28 +1,24 @@
-
-Basics [Tobi]
-	Newton
-	Lipshitz
-	Local Contraction
-
+﻿Block 1: Mara
+Other
 	Convexity
-	Linear Stability Analysis
-	Armijo condition (line search)
-	
-
-KKT [Tobi]
-	Lagrangian
-	Active Set
 	LICQ
+	Linear Stability Analysis
+	Lipshitz
+	Armijo condition (line search)
+	Local Contraction
+	Active Set
+
+KKT
+	Lagrangian
 	SOSC -> KKT invertible ->  solution stable against perturbation 
 	Reduced Hessian
 
-Newton type methods [Tobi]
-
 Optimization Strategies
-	QP
+	QP -> Sparsity exploitation
 	SQP
 	IPM
 
+Block 2: Paul 
 Optimization Methods (cont. time examples)
 	Sequential - Direct Single Shooting
 	Simultaneous - Direct Multiple Shooting
@@ -37,6 +33,7 @@ Dynamic Programming
 	LQR
 	Hamilton-Jacobi-Bellman
 
+Block 3: Tobi
 AD
 	FWD
 	BWD
@@ -47,6 +44,10 @@ Integrators
 	Implicit - relation to stiff systems
 	Collocation
 	choice of collocation times
+
+Newton - root finding
+	
+Newton type methods
 
 MPC
 

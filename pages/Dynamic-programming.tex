@@ -1,0 +1,99 @@
+
+\begin{tcolorbox}[colback=yellow!5!white,colframe=yellow!75!black,title=\textbf{Dynamic Programming}]
+	Idea: every part of an optimal trajectory is optimal
+	\begin{equation*}
+	J_k(x_k) = \min_u L(x_k, u) + J_{k+1}(f(x_k, u))
+	\end{equation*}
+	\begin{itemize}
+		\item infeasible points have $L(x,u) = \infty$
+		\item Backward sweep to obtain controls
+		\item Forward sweep to obtain state trajectory\\
+	\end{itemize}
+
+	\textbf{Bellman Equation}
+	\begin{align*}
+		J(x) &= \min_u \underbrace{L(x,u) + J(f(x, u))}\\
+		u^*(x) &= \arg \min_u \quad \;\; \tilde{J}(x, u)
+	\end{align*}
+	
+	
+	\textbf{Linear Quadratic Programs}
+	\begin{align*}
+		\min_{x,u}\quad&
+		\sum_{i=0}^{N-1}
+		\begin{bmatrix}
+			x_i\\ u_i
+		\end{bmatrix}^\top
+		\begin{bmatrix}
+			Q_i & S_i^\top\\ S_i & R_i
+		\end{bmatrix}
+	\begin{bmatrix}
+		x_i\\ u_i
+	\end{bmatrix}
+	+
+	x_N^\top P_N x_N\\
+	s.t.\quad&
+	x_0 - \bar{x}_0 = 0\\
+	&x_{i+1} - A_i x_i - B_i u_i = 0 \quad i = 0, ..., N-1
+	\end{align*}
+
+	\begin{align*}
+		J_N(x_N) &= x_N^\top P_N x_N && \bar{S}_k = S_k + B_k^\top P_{\mathbf{k+1}} A_k\\
+		J_k(x_k) &= x_k^\top P_k x_k &&  \bar{Q}_k = Q_k + A_k^\top P_{\mathbf{k+1}} A_k
+	\end{align*}
+	if $ \bar{R}_k = (R_k + B_k^\top P_{\mathbf{k+1}} B_k) \succ 0$
+	\begin{equation*}
+		P_k = \bar{Q}_k -\bar{S}_k ^\top (\bar{R}_k)^{-1} \bar{S}_k \quad \text{(Ricatti-equation)}
+	\end{equation*}
+	\begin{align*}
+		J_k(x_k) &= 
+		\min_{x,u}\quad
+		\begin{bmatrix}
+			x_k\\ u_k
+		\end{bmatrix}^\top
+		\begin{bmatrix}
+			\bar{Q}_k & \bar{S}_k^\top\\ \bar{S}_k & \bar{R}_k
+		\end{bmatrix}
+		\begin{bmatrix}
+			x_k\\ u_k
+		\end{bmatrix}
+		= x^\top_k P_k x_k\\
+		u_k^*(x_k) &= - \underbrace{\bar{R}^{-1} \bar{S}} x_k \quad \text{ (Schur Complement Lemma)}
+	\end{align*}
+
+\tcblower
+\textbf{Dynamic Programming in continuous Time}:
+\textbf{Hamilton Jacobi-Bellman}
+\begin{align*}
+	- \frac{\partial\; J}{\partial t} (x, t) &= \min_u L(x,u) + \nabla_x J(x,t)^\top f(x, t) \quad J(x, T) = E(x)\\
+	u^*(x,t) &= \arg \min_u \underbrace{L(x,u) + \nabla_x J(x,t)^\top f(x, t)}
+\end{align*}
+\textit{Hamilton function} $H(x,\lambda,u)  = L(x,u) + \lambda^\top f(x,u)$\\
+\textit{true Hamiltonian} $H^*(x,\lambda) = \min_u H(x,\lambda, u)$\\
+\textit{Pontryagin's Maximum Principle} or \textit{minimum principle}:\\
+\begin{align*}
+	 u^*(x,t) &= \arg \min_u  H(x,\lambda,u)\\
+	- \frac{\partial\; J}{\partial t} (x, t)  &= H^*(x,\nabla_x J(x,t))
+\end{align*}
+
+\textbf{Linear Quadratic Control in continuous time}
+\begin{align*}
+	\min_{x,u}\quad&
+	\int_{0}^{T}
+	\begin{bmatrix}
+		x(t)\\ u(t)
+	\end{bmatrix}^\top
+	\begin{bmatrix}
+		Q(t) & S(t)^\top\\ S(t) & R(t)
+	\end{bmatrix}
+	\begin{bmatrix}
+		x(t)\\ (t)
+	\end{bmatrix}
+	+
+	x(T)^\top P(T) x(T)\\
+	s.t.\quad&
+	x(0) - \bar{x}_0 = 0\\
+	&\dot{x}(t) - A(t) x(t) - B(t) u(t) = 0 \quad  t \in [0, T]
+\end{align*}
+
+\end{tcolorbox}

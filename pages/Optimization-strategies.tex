@@ -5,11 +5,12 @@
 	choose smoothing constant $\tau  > 0$
 	\begin{flalign*}
 		\nabla f(w^*) + \nabla g(w^*) \lambda^* + \nabla h(w^*) \mu^* &= 0\\
-		h_i(w^*) &\le 0 \\
-		\mu_i^* &\ge 0 & i=0, ..., n_h\\
+		g(w^*) &= 0 \\
 		\mu_ih_i(w^*) + \tau &= 0 & i=0, ..., n_h&&
 	\end{flalign*}
 	\begin{itemize}
+		\item $\mu^* \ge 0$ and $ h(w^*) \leq 0$ ensured by last line\\
+		(other quadrats unreachable through barrier formulation)
 		\item eliminate $\mu_i = - \frac{\tau}{h_i(w)}$
 		\item use  $\nabla_w \log (-h_i(w)) = \frac{1}{h_i(w)} \nabla_w h_i(w)$
 		\item solve \textit{barrier problem}:
@@ -21,7 +22,7 @@
 	alternative formulation that can handle \textit{infeasible initializations}:
 	\begin{flalign*}
 		\nabla f(w^*) + \nabla g(w^*) \lambda^* + \nabla h(w^*) \mu^* &= 0\\
-		h_i(w^*) &\le 0 \\
+		g(w^*) &= 0 \\
 		\mu_i^* s_i - \tau &=0 & i=0, ..., n_h\\
 		h_i(w^*) + s_i &= 0 & i=0, ..., n_h&&\\
 		s_i &\geq 0
@@ -35,8 +36,6 @@
 		\item feasible verices can be compared effiently (e.g. SIMPLEX algorithm)
 		\item iteratively refine active set
 	\end{itemize}
-	
-	\textbf{Quadratic Programming (QP)}
 	
 	\textbf{Sequential Quadratic Programming (SQP)}
 	\begin{itemize}

@@ -41,6 +41,7 @@
 		\nabla_w\mathcal{L}(w^*,\lambda^*,\mu^*)= \nabla f(w^*) + \nabla g(w^*) \lambda^* + \nabla h(w^*) \mu^* = 0\\
 		\mathrm{Complementary\ conditions}\left\{
 		\begin{array}{r}
+			g(w^*) = 0\\
 			h_i(w^*) \le 0 \\
 			\mu_i^* \ge 0 \\
 			\mu_ih_i(w^*) = 0
@@ -55,19 +56,24 @@
 	\end{itemize}
 
 	\textbf{Second order optimality conditions}\\
-	\textit{SONC}: $w^*$ local min and $ Z^\top
-		\nabla_w^2\mathcal{L}(w^*,\lambda^*, \mu^*)Z
-		\succcurlyeq 0$\\
-		% TODO: Maybe decide whether to mention the reduced hessian?
-		\textit{SOSC}: $w^*$ local min and $ Z^\top
-		\nabla_w^2\mathcal{L}(w^*,\lambda^*, \mu^*)Z\succ 0$\\
-		with $Z^\top Z=I, \frac{\partial \tilde{g}}{\partial w}(w^*)Z=0$, and
+	For $w^*$ local min, $Z^\top Z=I, \frac{\partial \tilde{g}}{\partial w}(w^*)Z=0$, and
 	\begin{flalign*}
 		\tilde{g}(w)=
 		\begin{bmatrix}
 			g(w) \\ h_i(w^*), i\in \mathcal{A}(w^*)
 		\end{bmatrix}
-	\end{flalign*}\\
+	\end{flalign*}
+	\begin{itemize}
+		\item   \textbf{SONC}: $ Z^\top
+		\nabla_w^2\mathcal{L}(w^*,\lambda^*, \mu^*)Z
+		\succcurlyeq 0$
+		\item  \textbf{SOSC}: $ \underbrace{Z^\top
+		\nabla_w^2\mathcal{L}(w^*,\lambda^*, \mu^*)Z}_{\text{reduced Hessian}}\succ 0$
+		\begin{itemize}
+			\item[$\Rightarrow$] KKT matrix is invertible
+			\item[$\Rightarrow$] solution is stable against perurubations\\
+		\end{itemize}
+	\end{itemize}
 
 	\textbf{Strict complementarity}, iff all active constraints are strictly active
 	\begin{flalign*}

@@ -1,0 +1,37 @@
+\begin{tcolorbox}[colback=orange!5!white, %
+  colframe=orange!75!black, %
+  title=\textbf{Model Predictive Control \& Moving Horizon Estimation}]
+  \textbf{Basic idea:} (for each step) \\
+  \begin{enumerate}
+  \item Observe current state of the system $\bar{x}_0$
+  \item predict and optimize the immediate future behaviour in $N$ steps (solve
+    open-loop optim. problem w/ init. state $\bar{x}_0$)
+  \item apply first control action $u_0^*$ at actuators
+  \item Rinse and repeat
+  \end{enumerate}
+  \textbf{Approaches to moving horizon:}\\
+  \begin{itemize}
+  \item Shift: Each step, throw away $(x_0,u_0)$ and move the window one step
+    further, simulating a new $x_N$ and $u_{N-1}$.
+  \item Warm-Start: Leave the whole simulation in memory, adapt $x_0$ and
+    simulate with the previous step as an initial guess. (good idea for short
+    horizon lengths)
+  \end{itemize}
+  \textbf{Real-Time optimization Strategies}\\
+  \begin{itemize}
+  \item Offline precomputations
+  \item Delay compensation by prediction (simulate the system at a time point
+    when the computations are complete)\\
+    %% start fancy delaygraph
+$x_k$ delay \hspace{.5mm} $u_k$ \hspace{.5cm}prepare \hspace{1.cm} $x_{k+1}$ delay $u_{k+1}$ \hspace{.2cm}prepare\\
+{\textcolor{black}{\rule{1mm}{2mm}}}{\textcolor{red}{\rule{1.2cm}{1mm}}}{\textcolor{blue}{\rule{1mm}{2mm}}}{\textcolor{green}{\rule{3cm}{1mm}}}{\textcolor{black}{\rule{1mm}{2mm}}}{\textcolor{red}{\rule{1.2cm}{1mm}}}{\textcolor{blue}{\rule{1mm}{2mm}}}{\textcolor{green}{\rule{1.5cm}{1mm}}}\\
+%% end fancy delaygraph
+  \item Subdivide into preparation and feedback phase
+  \item Update state estimates while iterating the Newton-steps
+  \end{itemize}
+\end{tcolorbox}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../HelpSheet"
+%%% TeX-engine: xetex
+%%% End:

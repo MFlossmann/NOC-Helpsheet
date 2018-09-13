@@ -1,0 +1,125 @@
+\begin{tcolorbox}[colback=orange!5!white, %
+  colframe=orange!75!black, %
+  title=\textbf{Calculating Derivatives}]
+
+\begin{center}
+	\vspace{-0.2cm}
+	\textbf{Methods to calculate a derivative}
+	\vspace{-0.2cm}
+\end{center}
+\begin{enumerate}
+	\item By hand (slow, error prone)
+	\item Symbolic Differentiation (slow, long code, accurate to mach. prec.)
+	\item Finite Differences (fast, inaccurate)
+	\begin{center}
+		\vspace{-0.1cm}
+		$\nabla f(x)^Tp \approx \frac{f(x+tp)-f(x)}{t}$
+		\vspace{-0.1cm}
+	\end{center}
+	Pitfalls: $t$ too small $\Rightarrow$ numerical cancellation errors,
+	$t$ too big $\Rightarrow$ linearization errors. Rule of thumb: $t = \sqrt{\epsilon_{\text{mach}}}$ with $\epsilon_\text{mach}$ the machine precision.
+	\item Imaginary trick in Matlab (fast, accurate to mach. pres). If $f$ is analytic and can be extended to complex numbers, then 
+	\begin{center}
+		\vspace{-0.1cm}
+		$\nabla f(x)^Tp \approx \frac{\text{imag}(f(x+itp))}{t}$
+		\vspace{-0.1cm}
+	\end{center}
+	This is closely related to forward AD.
+	\item Algorithmic Differentiation (fast, accurate)
+\end{enumerate}
+\begin{center}
+	\vspace{-0.1cm}
+	\textbf{Algorithmic Differentiation Basics}
+	\vspace{-0.2cm}
+\end{center}
+Each differentiable function $F:\mathbb{R}^n \to \mathbb{R}^{n_F}$ is composed of several ($m$) concatenated elementary operations $\Phi_i$ and a selection matrix $C$, i.e. 
+\begin{center}
+	\vspace{-0.1cm}
+	$F(x) = C\cdot\Phi_{m}(\Phi_{m-1}(\dots\Phi_2(\Phi_1(x))\dots))$
+	\vspace{-0.1cm}
+\end{center}
+The idea is to use the chain rule and differentiate each of the elementary operations separately $\Rightarrow$ Product of jacobians $J_i \in\mathbb{R}^{(n+i+1)\times (n+i)}$
+
+\begin{center}
+	\vspace{-0.1cm}
+	$J_F = C \cdot J_{m} \cdot J_{m-1} \cdots J_2 \cdot J_1$
+	\vspace{-0.0cm}
+\end{center}
+
+\begin{center}
+	\vspace{-0.1cm}
+	\textbf{Forward AD}
+	\vspace{-0.2cm}
+\end{center}
+First define \grqq forward seed\grqq\ vector $p \in \mathbb{R}^n$ and then evaluate the directional derivative
+\begin{center}
+	\vspace{-0.2cm}
+	$J_Fp = C \cdot (J_{m} \cdot (J_{m-1} \cdots (J_2 \cdot (J_1p)) \dots))$
+	\vspace{-0.1cm}
+\end{center}
+One evaluation of forward AD gives us one \textbf{column} of the jacobian.
+
+\textbf{Algorithm}
+\begin{enumerate}
+	\item Set $p$ to one of the unit vectors in $\mathbb{R}^n$
+	\item Forward evaluation: Compute all intermediate values using the elementary operations
+	\item Differentiation: Compute the dot quantities
+	\item Output
+\end{enumerate}
+
+\textbf{Dot-Quantities:} $\dot{x}_i = \frac{\text{d}x_i}{\text{d}x}p$, \grqq how does the intermediate quantity depend on the input?\grqq
+
+\textbf{Cost:} $\text{cost}(J_Fp) \leq 2 \cdot \text{cost}(F)$, $\text{cost}(J_F) \leq 2 \cdot n \cdot \text{cost}(F)$
+
+\textbf{Advantages:} Low storage requirements, step 2 and 3 parallelizable
+
+\textbf{Useful for:} Functions with few inputs or equally many inputs as outputs
+
+\begin{center}
+	\vspace{-0.1cm}
+	\textbf{Backward AD}
+	\vspace{-0.2cm}
+\end{center}
+First define the \grqq backward seed\grqq\ vector $\lambda \in \mathbb{R}^n$ and then evaluate the (transposed) directional derivative
+\begin{center}
+	\vspace{-0.1cm}
+	$J_F^T\lambda = J_1^T \cdot (J_2^T \cdots (J_{m-1}^T \cdot (C^T\lambda))\dots))$
+	\vspace{-0.1cm}
+\end{center}
+One evaluation of backward AD gives us one \textbf{row} of the jacobian.
+
+\textbf{Algorithm:}
+\begin{enumerate}
+	\item Set $\lambda$ to one of the unit vectors in $\mathbb{R}^{n_F}$, set bar quantities to zero
+	\item Forward evaluation: Compute intermediate variables using elementary operations
+	\item Backward sweep: Go through each elementary operation in reverse and update the bar quantities using the update rule below
+	\item Output 
+\end{enumerate}
+\textbf{Bar-quantity:} $\bar{x}_i = \lambda^T\frac{\text{d}F}{\text{d}x_i}$, \grqq How does the output $\lambda^TF(x)$ depend on the intermediate variable $x_i$?\grqq
+
+\textbf{Cost:} $\text{cost}(\lambda^TJ_F) \leq 3 \cdot \text{cost}(F)$, 
+$\text{cost}(J_F) \leq 3 \cdot n_F \cdot \text{cost}(F)$
+
+\textbf{Disadvantage:} High storage requirements
+
+\textbf{Useful for:} Functions with fewer outputs than inputs
+
+\textbf{Update rule:} Regard operation $x_{n+i+1} = \Phi_i(x_j,x_k)$, then
+\begin{center}
+	\vspace{-0.1cm}
+	$\bar{x}_j = \bar{x}_j + \frac{\partial \Phi_i}{\partial x_j} \cdot \bar{x}_{n+i+1}$ and
+	$\bar{x}_k = \bar{x}_k + \frac{\partial \Phi_i}{\partial x_k} \cdot \bar{x}_{n+i+1}$
+\end{center}
+
+\begin{center}
+	\vspace{-0.1cm}
+	\textbf{Efficient Hessian Computation}
+	\vspace{-0.2cm}
+\end{center}
+Regard a Lagrangian function (or any objective) $f:\mathbb{R}^n \to \mathbb{R}$ of which we want to compute the hessian $\nabla^2 f(x)$. With finite differences we need at least $n(n+1)/2$ function evaluations. Better: First use backward AD to compute jacobian, then use forward AD to compute hessian. Total cost: $\text{cost}(\nabla^2 f) \leq 6 \cdot n \cdot \text{cost}(f)$
+\end{tcolorbox}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../HelpSheet"
+%%% End:

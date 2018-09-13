@@ -1,0 +1,91 @@
+\begin{tcolorbox}[colback=green!5!white,
+  colframe=green!75!black,
+  title=\textbf{Numerical integration/simulation}]
+  \textbf{Explicit Runge-Kutta:} use $m$ evaluations each timestep $s_k$ with
+  \[\lim_{N\rightarrow\infty}s_k=x(t_k)\]
+  Intermediate time points:
+  \[t_{k,i}:= t_k + c_i\Delta t,\quad c_i\in [0,1]\]
+  \begin{align*}
+    s_{k, 1} &:= s_k \\
+    s_{k, 2} &:= s_k + \Delta t\cdot a_{21}\cdot f(s_{k,1}, t_{k,1}) \\
+    s_{k, 3} &:= s_k + \Delta t(a_{31}\cdot f(s_{k,1}, t_{k,1}) + a_{32}\cdot f(s_{k,2}, t_{k,2}))\\
+    s_{k, i} &:= s_k + \Delta t\sum^{i-1}_{j=1}a_{ij}\cdot f(s_{k,j}, t_{k,j}) \\
+    s_{k+1} &:= s_k + \Delta t \sum^m_{j=1}b_j\cdot f(s_{k,j}, t_{k,j})
+  \end{align*}
+  With the \emph{Butcher-Tableau:}
+  \begin{equation*}
+    \resizebox{!}{11mm}{$
+      \begin{array}{c|cccc}
+        \multicolumn{5}{c}{\mathrm{{\Large General\ case}}}\\
+      c_1&&&& \\
+      c_2&a_{21}&&& \\
+      c_3&a_{31}&a_{32}&& \\
+      \vdots & \ddots & \ddots&& \\
+      c_m & a_{m1} & \dots & a_{m,m-1} & \\ \hline
+      & b_1 & b_2 & \dots & b_m
+    \end{array}
+    $}
+  \hspace{15pt}
+  \begin{array}{c|cccc}
+    \multicolumn{5}{c}{\mathrm{RK4}}\\
+      0&&&& \\
+      0.5&0.5&&& \\
+      0.5&0&0.5&& \\
+      1 & 0 & 0 & 0.5 & \\ \hline
+      & \frac{1}{6} & \frac{1}{3} & \frac{1}{3} & \frac{1}{6}
+    \end{array}
+  \end{equation*}\\
+
+  \textbf{Implicit RK:}
+  \begin{itemize}
+  \item Square Butcher-Tableau
+  \item Nonlinear system of equations, solved with Newton method\\
+  \end{itemize}
+
+  \textbf{Orthogonal collocation:} approximate $x(t)$ on interval
+  $t\in[t_k,t_{k+1}]$ with polynomial $p_t,v_k\in \mathbb{R}^n$
+  \begin{itemize}
+  \item Built from Lagrange polynomials on set of collocation times
+    $t_{k,0},\dots,t_{k,d}$:
+    \begin{align*}
+      p_k(t,v_k)&=\sum^d_{i=0}v_{k,i}l_{k,i}(t),\\
+      l_{k,i}(t)&=\prod^d_{j=0,j\ne i}\frac{t-t_{k,i}}{t_{k,i}-t_{k,j}}\in\mathbb{R} \\
+      \Rightarrow l_{k,i}(t_{k,j})&=
+                                    \left\{ 
+                                    \begin{array}{l}
+                                      1\ \mathrm{if}\ i=j \\
+                                      0\ \mathrm{if}\ i\ne j
+                                    \end{array}
+      \right.
+    \end{align*}
+  \item To get proper approximations, solve the \emph{collocation equations}:
+    \begin{align*}
+      c_k(v_k,t_{k,i},s_k)=
+      \left[
+      \begin{array}{c}
+        v_{k,0}-s_k \\
+        \dot{p}_k(t_{k,1},v_k) - f(v_{k,1},t_{k,i}) \\
+        \dots \\
+        \dot{p}_k(t_{k,d},v_k)-f(v_{k,d},t_{k,i})
+      \end{array}
+      \right] = 0
+    \end{align*}
+  \item Collocation times $c_i\in [0,1]$: zeros of orthogonal Legendre
+    polynomials on $[t_k,t_{k+1}]$
+    \begin{align*}
+      \begin{array}{cc}
+        d & c_i \\ \hline
+        1 & 0.5 \\
+        2 & 0.5 \pm \sqrt{\frac{1}{3}} \\
+        3 & 0.5, 0.5 \pm \sqrt{\frac{3}{5}} \\
+        4 & 0.5 + \pm\sqrt{\frac{3}{7} \pm \frac{1}{7}\sqrt{\frac{24}{5}}}\\
+      \end{array}
+    \end{align*}
+  \end{itemize}
+\end{tcolorbox}
+%%% Local Variables:
+%%% coding: utf-8
+%%% mode: latex
+%%% TeX-engine: xetex
+%%% TeX-master: "../HelpSheet"
+%%% End:

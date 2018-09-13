@@ -6,20 +6,22 @@
 	\item controls might be discontinuous
 	\item differential equation might be unstable, very non lin and not suitable
     for forward simulation
-  \item If the state and costate $x^*(t),\lambda^*(t)$ are known at a point on
-    the optimal trajectory, we can get $u^*_{\mathrm{exp}}$ \\
+  \item \textbf{If the state and costate} $x^*(t),\lambda^*(t)$ \textbf{are known at a point on
+    the optimal trajectory, we can get} $u^*_{\mathrm{exp}}$ \\
 \end{itemize}
 \textbf{Two Point Boundary Value Problem (TPBVP)}
-\begin{align*}
-	x^*(0) &= \bar{x}_0 & & \text{(init val)}\\
-	\dot{x}^*(t) &= f(x^*(t), u^*(t)) \quad &t \in [0, T] \quad & \text{(ODE)}\\
-	\dot{\lambda}^*(t) &= - \nabla_x H(x^*(t), \lambda^*(t), u^*(t)) \quad & t \in [0, T] \quad & \text{(adjoint eq.)}\\
-	u^*(t) &= \arg \min_u H(x^*(t), \lambda^*(t), u) & & \text{(min.principle)}\\
-	\lambda^*(T) &= \nabla E(x^*(T)) & & \text{(adjoint final val)}
-\end{align*}
+\begin{align}
+	x^*(0) &= \bar{x}_0 & & \text{(init val)} \tag{1}\\
+	\dot{x}^*(t) &= f(x^*(t), u^*(t))& %t \in [0, T] \quad
+                        & \text{(ODE)}\tag{2}\\
+	\dot{\lambda}^*(t) &= - \nabla_x H(x^*(t), \lambda^*(t), u^*(t)) &% t \in [0, T] \quad
+                        & \text{(adjoint eq.)}\tag{3}\\
+	u^*(t) &= \arg \min_u H(x^*(t), \lambda^*(t), u) & & \text{(min.principle)}\tag{4}\\
+	\lambda^*(T) &= \nabla E(x^*(T)) & & \text{(adjoint final val)}\tag{5}
+\end{align}
 Equations 2,3,4 can be combined, such that
 \begin{align*}
-	y(t) = \begin{bmatrix}
+	y(t) := \begin{bmatrix}
 	x(t) \\ \lambda(t)
 	\end{bmatrix}
 	 \quad
@@ -34,19 +36,24 @@ Equations 2,3,4 can be combined, such that
  	\end{bmatrix}
 \end{align*}
 The only unkown is $\lambda_0$. Use newton-type method to find it\\s.t.
-$\lambda^*(T) = \nabla E(x^*(T)) $\\
+$\lambda^*(T) = \nabla E(x^*(T)) $ (equation (5))\\
+
 \textbf{Obtaining controls for the indirect approach}\\
-Regular arcs: $\frac{\partial H}{\partial u}(x^*,\lambda^*, u) = 0$ is
-invertible, if $\nabla^2_u H(x^*,\lambda^*,u^*)\succ 0$\\
-Singular arcs: $\nabla^2_u H$ is rank-deficient\\
-\begin{align*}
-  \left(
-  \frac{\mathrm{d}}{\mathrm{d}t}
-\right)^n \nabla_u H(x,\lambda,u) &=^! 0 \\
-\frac{\mathrm{d}}{\mathrm{d}t} \nabla_u H(x,\lambda,u) &= \nabla_{xu} H \dot{x} + \nabla_{\lambda u} H\dot{\lambda} \\
-  &= \nabla_{x u} H f(x,u) + \nabla_{\lambda u}(-\nabla_x H)
-\end{align*}
-Differentiate by $t$, until there's a direct dependence on $u$ and solve for $u$.
+
+\begin{itemize}
+\item \emph{Regular arcs:} $\frac{\partial H}{\partial u}(x^*,\lambda^*, u) = 0$
+  is invertible, if\\ \mbox{$\nabla^2_u H(x^*,\lambda^*,u^*)\succ 0$}
+\item \emph{Singular arcs:} $\nabla^2_u H$ is rank-defficient
+  \begin{align*}
+    \left(
+    \frac{\mathrm{d}}{\mathrm{d}t}
+    \right)^n \nabla_u H(x,\lambda,u) &=^! 0 \\
+    \frac{\mathrm{d}}{\mathrm{d}t} \nabla_u H(x,\lambda,u) &= \nabla_{xu} H \dot{x} + \nabla_{\lambda u} H\dot{\lambda} \\
+                                      &= \nabla_{x u} H f(x,u) + \nabla_{\lambda u}(-\nabla_x H)
+  \end{align*}
+  Differentiate by $t$, until there's a direct dependence on $u$ and solve for
+  $u$.
+\end{itemize}
 \end{tcolorbox}
 %%% Local Variables:
 %%% mode: latex

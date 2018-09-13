@@ -43,12 +43,14 @@
 	\end{align*}
 
 	\begin{align*}
-		J_N(x_N) &= x_N^\top P_N x_N && \bar{S}_k = S_k + B_k^\top P_{\mathbf{k+1}} A_k\\
-		J_k(x_k) &= x_k^\top P_k x_k &&  \bar{Q}_k = Q_k + A_k^\top P_{\mathbf{k+1}} A_k
-	\end{align*}
-	if $ \bar{R}_k = (R_k + B_k^\top P_{\mathbf{k+1}} B_k) \succ 0$
+		J_N(x_N) &= x_N^\top P_N x_N && \bar{S}_k := S_k + B_k^\top P_{\mathbf{k+1}} A_k\\
+		J_k(x_k) &= x_k^\top P_k x_k &&  \bar{Q}_k := Q_k + A_k^\top P_{\mathbf{k+1}} A_k
+	\end{align*}\\
+  
+	if $ \bar{R}_k := (R_k + B_k^\top P_{\mathbf{k+1}} B_k) \succ 0 \Rightarrow$
+  \textbf{Ricatti-equation:}
 	\begin{equation*}
-		P_k = \bar{Q}_k -\bar{S}_k ^\top (\bar{R}_k)^{-1} \bar{S}_k \quad \text{(Ricatti-equation)}
+		P_k = \bar{Q}_k -\bar{S}_k ^\top (\bar{R}_k)^{-1} \bar{S}_k
 	\end{equation*}
 	\begin{align*}
 		J_k(x_k) &= 
@@ -102,3 +104,9 @@
 \end{align*}
 
 \end{tcolorbox}
+%%% Local Variables:
+%%% coding: utf-8
+%%% mode: latex
+%%% TeX-engine: xetex
+%%% TeX-master: "../HelpSheet"
+%%% End:

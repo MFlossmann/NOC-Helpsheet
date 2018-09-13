@@ -1,4 +1,5 @@
-\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=\textbf{Karush-Kuhn-Tucker (KKT) Conditions}]
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=\textbf{Karush-Kuhn-Tucker
+    (KKT) Conditions}]
 	\textbf{Problem:\hspace{1.7cm} Linear: \hspace{1.3cm} Linear-Quadratic:}\\
 \begin{minipage}{0.33\columnwidth}
 	\begin{empheq}[box=\fbox]{align*}
@@ -30,13 +31,13 @@
 		h_i(w)=0$
 	\end{itemize}
 	\begin{flalign*}
-	\mathcal{A}(w^*):=\{i|i=1,2,...,n_h; \lambda^*_i \ne 0\}\ \mathrm{(``Active\ Set"')}
+	\mathcal{A}(w^*):=\{i|i=1,2,...,n_h\}\ \mathrm{(``Active\ Set"')}
 \end{flalign*}\\
 	\textbf{\textsc{LaGrangian}}
 	\begin{flalign*}
 		\mathcal{L}(w,\lambda, \mu) = f(w) + \lambda^\top g(w) + \mu^\top h(w)
 	\end{flalign*}
-	\textbf{KKT cond.} %TODO: 2nd KKT
+	\textbf{KKT cond. (FONC)} %TODO: 2nd KKT
 	\begin{flalign*}
 		\nabla_w\mathcal{L}(w^*,\lambda^*,\mu^*)= \nabla f(w^*) + \nabla g(w^*) \lambda^* + \nabla h(w^*) \mu^* = 0\\
 		\mathrm{Complementary\ conditions}\left\{
@@ -71,7 +72,7 @@
 		\nabla_w^2\mathcal{L}(w^*,\lambda^*, \mu^*)Z}_{\text{reduced Hessian}}\succ 0$
 		\begin{itemize}
 			\item[$\Rightarrow$] KKT matrix is invertible
-			\item[$\Rightarrow$] solution is stable against perurubations\\
+			\item[$\Rightarrow$] solution is stable against perturbations\\
 		\end{itemize}
 	\end{itemize}
 
@@ -83,3 +84,9 @@
 
 
 \end{tcolorbox}
+%%% Local Variables:
+%%% coding: utf-8
+%%% mode: latex
+%%% TeX-engine: xetex
+%%% TeX-master: "../HelpSheet"
+%%% End:

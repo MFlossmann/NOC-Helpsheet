@@ -4,7 +4,10 @@
 	\item \textit{first optimize then discretize}
 	\item controls must be eliminatable
 	\item controls might be discontinuous
-	\item differential equation might mbe unstable, very non lin and not suitable for forward simulation\\
+	\item differential equation might mbe unstable, very non lin and not suitable
+    for forward simulation
+  \item If the state and costate $x^*(t),\lambda^*(t)$ are known at a point on
+    the optimal trajectory, we can get $u^*_{\mathrm{exp}}$ \\
 \end{itemize}
 \textbf{Two Point Boundary Value Problem (TPBVP)}
 \begin{align*}
@@ -30,5 +33,23 @@ Equations 2,3,4 can be combined, such that
 		x_0\\ \lambda_0
  	\end{bmatrix}
 \end{align*}
-The only unkown is $\lambda_0$. Use newton-type method to find it s.t. $\lambda^*(T) = \nabla E(x^*(T)) $
+The only unkown is $\lambda_0$. Use newton-type method to find it\\s.t.
+$\lambda^*(T) = \nabla E(x^*(T)) $\\
+\textbf{Obtaining controls for the indirect approach}\\
+Regular arcs: $\frac{\partial H}{\partial u}(x^*,\lambda^*, u) = 0$ is
+invertible, if $\nabla^2_u H(x^*,\lambda^*,u^*)\succ 0$\\
+Singular arcs: $\nabla^2_u H$ is rank-deficient\\
+\begin{align*}
+  \left(
+  \frac{\mathrm{d}}{\mathrm{d}t}
+\right)^n \nabla_u H(x,\lambda,u) &=^! 0 \\
+\frac{\mathrm{d}}{\mathrm{d}t} \nabla_u H(x,\lambda,u) &= \nabla_{xu} H \dot{x} + \nabla_{\lambda u} H\dot{\lambda} \\
+  &= \nabla_{x u} H f(x,u) + \nabla_{\lambda u}(-\nabla_x H)
+\end{align*}
+Differentiate by $t$, until there's a direct dependence on $u$ and solve for $u$.
 \end{tcolorbox}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../HelpSheet"
+%%% TeX-engine: xetex
+%%% End:

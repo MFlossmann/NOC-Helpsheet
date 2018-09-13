@@ -1,0 +1,31 @@
+
+\begin{tcolorbox}[colback=red!5!white,%
+  colframe=red!75!black,%
+  title=\textbf{Discrete Optimization}]
+  \textbf{Simultaneous Approach:} Simulate and optimize at the same time
+  \begin{itemize}
+  \item 
+  \end{itemize}
+  
+  \textbf{Sequential Approach:} First eliminate dependencies on intermediate
+  states $x_{i\ne 0}$, then optimize, only keeping $U$ and $x_0$:
+  \begin{align*}
+    \bar{x}(x_0, U) &= x_0 \\
+    \bar{x}_{k+1}(x_0, U)& =f(\bar{x}_k(x_0, U), u_k)
+  \end{align*}
+  \begin{itemize}
+  \item Problem:
+    \begin{align*}
+      \min_{x_0, U}&\sum^{N-1}_{k=0} L(\bar{x}_k(x_0, U), u_k) + E(\bar{x}_N(x_0, U)) \\
+      \mathtt{s.t.}\quad & r(x_0, \bar{x}_N(x_0, U)) = 0 \\
+                   & h(\bar{x}_k(x_0, U), u_k) \le 0
+    \end{align*}
+  \item Dense $\nabla^2_{(x_0,U)} \mathcal{L}((x_0,U), \lambda_r, \mu)$
+  \end{itemize}
+
+\end{tcolorbox}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../HelpSheet"
+%%% TeX-engine: xetex
+%%% End:

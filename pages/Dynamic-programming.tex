@@ -67,7 +67,8 @@
 		= x^\top_k P_k x_k\\
 		u_k^*(x_k) &= - \underbrace{\bar{R}^{-1} \bar{S}} x_k \quad \text{ (Schur Complement Lemma)}
 	\end{align*}
-
+  Infinite horizon/LQR: Just drop the $k$'s ($P_{k+1} = P_k$) $\Rightarrow$
+  algebraic Ricatti equation.
 \tcblower
 \textbf{Dynamic Programming in continuous Time}:
 \textbf{Hamilton Jacobi-Bellman}
@@ -102,7 +103,12 @@
 	x(0) - \bar{x}_0 = 0\\
 	&\dot{x}(t) - A(t) x(t) - B(t) u(t) = 0 \quad  t \in [0, T]
 \end{align*}
-
+\textbf{Differential Ricatti eqn.}
+\begin{align*}
+  -\dot{P} &= Q + PA + A^TP - (S+B^TP)^TR^{-1}(S+B^TP) \\
+  u_{\mathrm{feedback}}^*(x,t) = R(t)^{-1} (S(t) + B(t)^TP(t))x
+               
+\end{align*}
 \end{tcolorbox}
 %%% Local Variables:
 %%% coding: utf-8

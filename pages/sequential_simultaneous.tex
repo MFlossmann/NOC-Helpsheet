@@ -7,10 +7,86 @@
     \begin{array}{|rl|}\hline
     \min_w &F(w) \\
     \mathrm{s.t.}\quad & G(w) \\ \hline
-    \end{array}
-
+    \end{array}, %% dirty hack, I know
+    F(w)&:= \sum^{N-1}_{k=0} L(x_k,u_k) + E(x_N) \\
+    G(w)&:=
+          \left[
+          \begin{array}{c}
+            f(x_0,u_0)-x_1 \\
+            f(x_1,u_1)-x_2 \\
+            \dots \\
+            f(x_{N-1},u_{N-1})-x_N \\
+            r(x_0,x_N)
+          \end{array}
+          \right]
   \end{align*}
   \textbf{KKT for simultaneous approach}
+  \begin{flalign*}
+    \nabla_{x_0}\mathcal{L}(w,\lambda) &= \nabla_{x_0}L(x_0,u_0) +
+    \nabla_{x_0}f(x_0,u_0)\lambda_1 + \nabla_{x_0}r(x_0, x_N)\lambda_r &=
+    0 \\
+    \nabla_{x_k}\mathcal{L}(w,\lambda) &= \nabla_{x_k}L(x_k,u_k) +
+    \nabla_{x_k}f(x_k,u_k)\cdot \lambda_{k+1} - \lambda_k  &= 0 \\
+    \nabla_{x_N}\mathcal{L}(w,\lambda) &= \nabla_{x_N}E(x_N) + \nabla_{x_N}r(x_N)\cdot
+    \lambda_r - \lambda_N  &= 0 \\
+    \nabla_{u_k}\mathcal{L}(w,\lambda) &= \nabla_{u_k}L(x_k, u_k) + \nabla_{u_k}f(x_k,u_k)\cdot \lambda_{k+1} &= 0 \\
+  \end{flalign*}
+  \textbf{KKT for sequential approach}
+  \begin{flalign*}
+    x_0 &= \bar{x}_0 \\
+    x_{k+1} &= f(x_k, u_k) \\
+    \lambda_N &= \nabla_{x_N}E(x_N) \\
+    \lambda_k &= \nabla_{x_k}L(x_k, u_k) + \nabla_{x_k}f(x_k, u_k) \lambda_{k+1}
+    \\
+   0 &= \nabla_{u_k}L(x_k,u_k) + \nabla_{u_k}f(x_k, u_k) \lambda_{k+1}
+ \end{flalign*}\\
+ 
+  \textbf{Sparse QP} One SQP step solves the problem:
+  \begin{align*}
+    \min_{\Delta w}\quad &\nabla F(w)^T \Delta w + 0.5 \Delta w^T \nabla^2_w\mathcal{L}(w,\lambda, \mu)\Delta w \\
+    \mathrm{s.t.}\quad & G(w) + \nabla G(w)^T \Delta w = 0, \\
+    & H(w) + \nabla H(w)^T\Delta w \le 0
+  \end{align*}
+  Now:
+  \begin{flalign*}
+    Q_k := \nabla^2_{w_k}\mathcal{L}(w,\lambda, \mu),\quad g_k:=\nabla(w)L(w_k),\quad g_N:=\nabla(x_N)E(x_N) \\
+    a := f(x_k, u_k) - x_{k+1}, \quad A_k:=\nabla_{x_k}f(x_k,u_k), \quad B_k:=
+    \nabla_{u_k} f(x_k, u_k) \\
+    r:=\sum^{N-1}_{k=0}r_k(x_k,u_k) + r_N(x_N),\quad
+    R_k:=\nabla_{x_k,u_k}r_k(x_k,u_k) \\
+    (\mathrm{Gleicher\ Scheiss\ mit\ } h_k,h_N, \mathrm{usw.}),\quad
+    R_N:=\nabla_{x_N}r_N
+  \end{flalign*}
+  Then:
+  \begin{flalign*}
+    \min_{\Delta w}\quad & 0.5\left(\sum^{N-1}_{k=0} \Delta w_k^T Q_k w_k + \Delta x_N^T Q_N
+    \Delta x_N\right) + \sum^N_{k=0}\Delta w_k^T g_k + \Delta x_N g_N \\
+    \mathrm{s.t.}\quad& a_k + A_k\Delta x_k + B_k \Delta u_k - \Delta x_{k+1} =
+    0 \\
+    & r + \sum^{N-1}_{k=0} R_k\Delta w + R_N\Delta x_N = 0 \\
+    & h_k + H_k \Delta w \le 0 \\
+    & h_N + H_N\Delta x_N \le 0
+  \end{flalign*}
+  \textbf{Condensing an SQP:} System:
+  \begin{align*}
+    \Delta x_{k+1}=a_k + A_k x_{k} + B_k u_k
+  \end{align*}
+  split up $\Delta w \rightarrow \Delta
+  w_\mathrm{dep}, \Delta w_\mathrm{indep}$
+  \begin{align*}
+    \left[
+    \begin{array}{c}
+      \Delta x_1 \\ \dots \\ \Delta x_N
+    \end{array}
+    \right] = v + M 
+    \left[
+    \begin{array}{c}
+      \Delta x_0 \\ \Delta u_1 \\ \dots \\ \Delta u_{N-1}
+    \end{array}
+    \right],\quad v_1=a_0, v_{k+1} = a_k + A_k v_k
+  \end{align*}
+  $M$ is lower triangular, bc. $\Delta x_j$ indep. of $u_k$ if $k>j$
+  
 \end{tcolorbox}
 %%% Local Variables:
 %%% mode: latex

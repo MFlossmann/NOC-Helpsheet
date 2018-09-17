@@ -103,12 +103,14 @@
 	x(0) - \bar{x}_0 = 0\\
 	&\dot{x}(t) - A(t) x(t) - B(t) u(t) = 0 \quad  t \in [0, T]
 \end{align*}
-\textbf{Differential Ricatti eqn.}
-\begin{align*}
+\textbf{Differential Ricatti eqn.}\\
+\begin{flalign*}
   -\dot{P} &= Q + PA + A^TP - (S+B^TP)^TR^{-1}(S+B^TP) \\
-  u_{\mathrm{feedback}}^*(x,t) = R(t)^{-1} (S(t) + B(t)^TP(t))x
-               
-\end{align*}
+  u_{\mathrm{feedback}}^*(x,t) &= R(t)^{-1} (S(t) + B(t)^TP(t))x
+\end{flalign*}
+$\lambda_k$ are the gradients of the value function along the optimal
+trajectory:
+\[\lambda_k = \nabla J_k(x_k^*)\]
 \end{tcolorbox}
 %%% Local Variables:
 %%% coding: utf-8

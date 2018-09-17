@@ -61,7 +61,15 @@
   \end{align*}
   \includegraphics[width=0.8\textwidth]{pred_correct_alg}
 
-  
+  \textbf{IP method in online path following:}
+  \begin{align}
+    R_\tau(y,p) = 
+    \left[
+    \begin{array}{c}
+      \nabla_w\mathcal{L}(y,p) \\ g(w,p) \\ h(w,p) + s \\ \mu_is_i - \tau
+    \end{array}
+    \right] = 0,\quad \mathrm{for\ a\ fixed\ }\tau > 0
+  \end{align}
 \end{tcolorbox}
 
 %%% Local Variables:

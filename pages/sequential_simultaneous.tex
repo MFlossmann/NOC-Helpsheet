@@ -58,15 +58,16 @@
     R_N:=\nabla_{x_N}r_N
   \end{flalign*}
   Then:
-  \begin{flalign*}
+  \begin{align*}
     \min_{\Delta w}\quad & 0.5\left(\sum^{N-1}_{k=0} \Delta w_k^T Q_k w_k + \Delta x_N^T Q_N
-    \Delta x_N\right) + \sum^N_{k=0}\Delta w_k^T g_k + \Delta x_N g_N \\
+      \Delta x_N\right) + \sum^N_{k=0}\Delta w_k^T g_k \\
+    &+ \Delta x_N g_N\\
     \mathrm{s.t.}\quad& a_k + A_k\Delta x_k + B_k \Delta u_k - \Delta x_{k+1} =
     0 \\
     & r + \sum^{N-1}_{k=0} R_k\Delta w + R_N\Delta x_N = 0 \\
     & h_k + H_k \Delta w \le 0 \\
     & h_N + H_N\Delta x_N \le 0
-  \end{flalign*}
+  \end{align*}
   \textbf{Condensing an SQP:} System:
   \begin{align*}
     \Delta x_{k+1}=a_k + A_k x_{k} + B_k u_k
@@ -86,6 +87,8 @@
     \right],\quad v_1=a_0, v_{k+1} = a_k + A_k v_k
   \end{align*}
   $M$ is lower triangular, bc. $\Delta x_j$ indep. of $u_k$ if $k>j$
+  \textbf{Condense if:} $N$ and $n_u$ are relatively smallm compared to $n_x$ \\
+  \textbf{Keep it sparse, if:} $n_x$ is very small compared to $N\cdot n_u$ \\
   
 \end{tcolorbox}
 %%% Local Variables:
